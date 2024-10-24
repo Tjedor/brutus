@@ -15,6 +15,7 @@ export const buildUploadCsv = (PersonRepository: PersonRepository) => {
         try {
           const personRequest = createAndValidateCreatePersonRequest({
             ...data,
+            age: parseInt(data["age"]),
             firstname: data["name/first"],
             lastname: data["name/last"],
           });
@@ -22,7 +23,6 @@ export const buildUploadCsv = (PersonRepository: PersonRepository) => {
         } catch (error) {}
       })
       .on("end", async () => {
-        console.log(results.length);
         await PersonRepository.createMany(results);
       });
   };

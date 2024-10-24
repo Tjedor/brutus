@@ -38,11 +38,45 @@ export const buildPersonRepository = (uri: string) => {
           },
         ])
         .toArray();
+
+      const topNames = await collection
+        .aggregate<{ _id: string; count: number }>([
+          {
+            $group: {
+              _id: "$firstname",
+              count: { $sum: 1 },
+            },
+          },
+          {
+            $sort: { count: -1 },
+          },
+          {
+            $limit: 3,
+          },
+        ])
+        .toArray();
+
+      const avgrageAge = await collection
+        .aggregate([
+          {
+            $group: {
+              _id: null,
+              avgAge: { $avg: { $toInt: "$age" } },
+            },
+          },
+        ])
+        .toArray();
+
       return {
         totalPeople: await collection.countDocuments(),
+        averageAge: avgrageAge.length ? avgrageAge[0].avgAge : NaN,
         topCities: topCities.map((city) => ({
           name: city._id,
           count: city.count,
+        })),
+        topNames: topNames.map((name) => ({
+          name: name._id,
+          count: name.count,
         })),
       };
     },
