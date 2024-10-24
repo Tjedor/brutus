@@ -7,8 +7,8 @@ import {
   TableRow,
 } from "@mui/material";
 
+const loadingRows = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 export const SkeletonTable = () => {
-  const loadingRows = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <div>
       <Table>
@@ -28,7 +28,7 @@ export const SkeletonTable = () => {
         <TableBody>
           {loadingRows.map((r) => {
             return (
-              <TableRow>
+              <TableRow key={r}>
                 <TableCell>
                   <Skeleton variant="rectangular" width={"80px"} />
                 </TableCell>

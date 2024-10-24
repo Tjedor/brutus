@@ -16,6 +16,19 @@ export const DatasetStatsSection = ({ stats }: Props) => {
         <strong>Total People:</strong> {stats?.totalPeople}
       </Typography>
 
+      <Typography variant="body1" style={{ textAlign: "start" }}>
+        <strong>Average Age:</strong> {stats?.averageAge.toFixed(0)}
+      </Typography>
+
+      <Stack>
+        <Typography variant="body1" style={{ textAlign: "start" }}>
+          <strong>Top Cities:</strong>{" "}
+          {stats?.topNames
+            .map((name) => `${name.name}: ${name.count}`)
+            .join(", ")}
+        </Typography>
+      </Stack>
+
       <Stack>
         <Typography variant="body1" style={{ textAlign: "start" }}>
           <strong>Top Cities:</strong>{" "}

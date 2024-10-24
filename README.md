@@ -10,7 +10,7 @@ GET /person is a paginated query towards the full dataset of people stored in th
 GET /person-stats:
 Retrieves very simple data about the dataset. total count and the three most common cities
 
-![alt text](image-1.png)
+![alt text](image.png)
 
 ## Brutus App
 

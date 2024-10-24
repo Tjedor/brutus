@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 export interface DatasetStats {
   totalPeople: number;
   topCities: { name: string; count: number }[];
+  averageAge: number;
+  topNames: { name: string; count: number }[];
 }
 
 const baseUrl = import.meta.env.VITE_API_BASE ?? "http://localhost:3000";
@@ -11,7 +13,6 @@ const statsUrl = `${baseUrl}/person-stats`;
 export const useDatasetStats = () => {
   const [stats, setStats] = useState<DatasetStats | null>(null);
   const [loading, setLoading] = useState(false);
-
   const fetchStats = async () => {
     setLoading(true);
     try {
